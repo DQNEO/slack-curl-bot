@@ -12,7 +12,9 @@ import (
 
 func execCurl(input string) string {
     log.Printf("%s\n", input)
-    cmd := exec.Command("curl", "-X", "GET", "https://httpbin.org/get")
+    substr := input[5:len(input)]
+
+    cmd := exec.Command("curl", substr)
     byts, err := cmd.Output()
     if err != nil {
         log.Fatal(err)
