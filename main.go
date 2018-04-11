@@ -8,6 +8,19 @@ import (
     "strings"
 )
 
+func handle(input string) string {
+    text := input
+    var output string
+    if strings.HasPrefix(text, "curl ") {
+        log.Printf("it's curl\n")
+        output = "calling curl"
+    } else {
+        log.Printf("it's NOT curl\n")
+        output = "(nothing to do)"
+    }
+    return output
+}
+
 func run(api *slack.Client) int {
     rtm := api.NewRTM()
     go rtm.ManageConnection()
@@ -23,13 +36,7 @@ func run(api *slack.Client) int {
                 log.Printf("Message: %v\n", ev)
                 log.Printf("Message.Msg: %v\n", ev.Msg)
                 log.Printf("Message.Msg.Text: %s\n", ev.Msg.Text)
-                text := ev.Msg.Text
-                if strings.HasPrefix(text, "curl ") {
-                    log.Printf("it's curl\n")
-                } else {
-                    log.Printf("it's NOT curl\n")
-                }
-                output := "Hello world"
+                output := handle(ev.Msg.Text)
                 rtm.SendMessage(rtm.NewOutgoingMessage(output, ev.Channel))
 
             case *slack.InvalidAuthEvent:
