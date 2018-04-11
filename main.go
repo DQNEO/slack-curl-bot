@@ -29,7 +29,8 @@ func run(api *slack.Client) int {
                 } else {
                     log.Printf("it's NOT curl\n")
                 }
-                rtm.SendMessage(rtm.NewOutgoingMessage("Hello world", ev.Channel))
+                output := "Hello world"
+                rtm.SendMessage(rtm.NewOutgoingMessage(output, ev.Channel))
 
             case *slack.InvalidAuthEvent:
                 log.Print("Invalid credentials")
