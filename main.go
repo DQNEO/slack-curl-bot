@@ -29,7 +29,7 @@ func handle(input string) string {
     if strings.HasPrefix(text, "curl ") {
         log.Printf("it's curl\n")
         body := execCurl(text)
-        output = body
+        output = fmt.Sprintf("```\n%s```", body)
     } else {
         log.Printf("it's NOT curl\n")
         output = "(nothing to do)"
