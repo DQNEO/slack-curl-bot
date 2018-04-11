@@ -20,6 +20,8 @@ func run(api *slack.Client) int {
 
             case *slack.MessageEvent:
                 log.Printf("Message: %v\n", ev)
+                log.Printf("Message.Msg: %v\n", ev.Msg)
+                log.Printf("Message.Msg.Text: %s\n", ev.Msg.Text)
                 rtm.SendMessage(rtm.NewOutgoingMessage("Hello world", ev.Channel))
 
             case *slack.InvalidAuthEvent:
