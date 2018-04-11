@@ -6,14 +6,30 @@ import (
 
     "github.com/nlopes/slack"
     "strings"
+    "os/exec"
+    "fmt"
 )
+
+func execCurl(input string) string {
+    log.Printf("%s\n", input)
+    cmd := exec.Command("curl", "-X", "GET", "https://httpbin.org/get")
+    byts, err := cmd.Output()
+    if err != nil {
+        log.Fatal(err)
+    }
+    out := string(byts)
+    fmt.Printf(out)
+    return out
+}
+
 
 func handle(input string) string {
     text := input
     var output string
     if strings.HasPrefix(text, "curl ") {
         log.Printf("it's curl\n")
-        output = "calling curl"
+        body := execCurl(text)
+        output = body
     } else {
         log.Printf("it's NOT curl\n")
         output = "(nothing to do)"
