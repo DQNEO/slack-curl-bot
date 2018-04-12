@@ -53,16 +53,16 @@ func Test_textToCmd(t *testing.T) {
 			"arg 1",
 			args{input:"curl --help"},
 			&exec.Cmd{
-				Path:"curl",
-				Args:[]string{"--help"},
+				Path:"/usr/bin/curl",
+				Args:[]string{"curl", "--help"},
 			},
 		},
 		{
 			"arg 1",
 			args{input:"curl -X get https://google.com/"},
 			&exec.Cmd{
-				Path:"curl",
-				Args:[]string{" -X get https://google.com/"},
+				Path:"/usr/bin/curl",
+				Args:[]string{"curl","-X get https://google.com/"},
 			},
 		},
 		// TODO: Add test cases.
