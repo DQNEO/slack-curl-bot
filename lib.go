@@ -8,10 +8,7 @@ import (
 )
 
 func execCurl(input string) string {
-	log.Printf("%s\n", input)
-	substr := input[5:len(input)]
-
-	cmd := exec.Command("curl", substr)
+	cmd := textToCmd(input)
 	byts, err := cmd.Output()
 	if err != nil {
 		log.Fatal(err)
@@ -23,6 +20,14 @@ func execCurl(input string) string {
 
 func isCurlCommand(text string) bool {
 	return strings.HasPrefix(text, "curl ")
+}
+
+func textToCmd(input string) *exec.Cmd {
+	log.Printf("%s\n", input)
+	substr := input[5:len(input)]
+
+	cmd := exec.Command("curl", substr)
+	return cmd
 }
 
 func handle(input string) string {
