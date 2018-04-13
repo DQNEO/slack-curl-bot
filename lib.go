@@ -22,6 +22,10 @@ func isCurlCommand(text string) bool {
 	return strings.HasPrefix(text, "curl ")
 }
 
+func isMentionToMe(input string) bool {
+	return strings.HasPrefix(input, "U12345")
+}
+
 func textToCmd(input string) *exec.Cmd {
 	log.Printf("%s\n", input)
 	substr := input[5:len(input)]
@@ -31,11 +35,14 @@ func textToCmd(input string) *exec.Cmd {
 }
 
 func handle(input string) string {
-	text := input
 	var output string
-	if isCurlCommand(text) {
+	if isMentionToMe(input) {
+		return ""
+	}
+
+	if isCurlCommand(input) {
 		log.Printf("it's curl\n")
-		body := execCurl(text)
+		body := execCurl(input)
 		output = fmt.Sprintf("```\n%s```", body)
 	} else {
 		log.Printf("it's NOT curl\n")

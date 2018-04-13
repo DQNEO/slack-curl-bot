@@ -75,3 +75,32 @@ func Test_textToCmd(t *testing.T) {
 		})
 	}
 }
+
+func Test_isMentionToMe(t *testing.T) {
+	type args struct {
+		input string
+	}
+	tests := []struct {
+		name string
+		args args
+		want bool
+	}{
+		{
+			"has no mention",
+			args{"hello world",},
+			false,
+		},
+		{
+			"has mention",
+			args{"U12345 hello world",},
+			true,
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if got := isMentionToMe(tt.args.input); got != tt.want {
+				t.Errorf("isMentionToMe() = %v, want %v", got, tt.want)
+			}
+		})
+	}
+}
