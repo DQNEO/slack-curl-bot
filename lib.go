@@ -36,7 +36,7 @@ func textToCmd(input string) *exec.Cmd {
 
 func handle(input string) string {
 	var output string
-	if isMentionToMe(input) {
+	if ! isMentionToMe(input) {
 		return ""
 	}
 
