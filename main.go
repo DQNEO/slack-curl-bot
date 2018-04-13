@@ -8,8 +8,8 @@ import (
 )
 
 
-func run(api *slack.Client) int {
-    rtm := api.NewRTM()
+func run(sc *slack.Client) int {
+    rtm := sc.NewRTM()
     go rtm.ManageConnection()
 
     for {
@@ -37,6 +37,6 @@ func run(api *slack.Client) int {
 
 func main() {
     token := os.Getenv("TOKEN")
-    api := slack.New(token)
-    os.Exit(run(api))
+    sc := slack.New(token)
+    os.Exit(run(sc))
 }
