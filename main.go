@@ -36,7 +36,7 @@ func run(sc *slack.Client) int {
 }
 
 func main() {
-    token := os.Getenv("TOKEN")
+    token := os.Getenv("SLACK_CURL_BOT_TOKEN")
     sc := slack.New(token)
     os.Exit(run(sc))
 }
