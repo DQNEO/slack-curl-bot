@@ -22,8 +22,10 @@ func isCurlCommand(text string) bool {
 	return strings.HasPrefix(text, "curl ")
 }
 
+var BotId = "@UA5UWB2NB"
+
 func isMentionToMe(input string) bool {
-	return strings.HasPrefix(input, "U12345")
+	return strings.HasPrefix(input, fmt.Sprintf("<%s> ", BotId))
 }
 
 func textToCmd(input string) *exec.Cmd {
@@ -37,6 +39,7 @@ func textToCmd(input string) *exec.Cmd {
 func handle(input string) string {
 	var output string
 	if ! isMentionToMe(input) {
+		log.Printf("not talking to me...\n")
 		return ""
 	}
 
